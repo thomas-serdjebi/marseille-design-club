@@ -4,6 +4,8 @@ class DataBase {
 
     //Database connection
 
+    protected $db; 
+
     public function __construct(){
 
         try{
@@ -11,7 +13,7 @@ class DataBase {
             $db->exec('SET NAMES utf8');
             echo 'Connexion réussie';
             $this->connexion = $db;
-            return $db;;
+            
         }
           
           catch(PDOException $e){

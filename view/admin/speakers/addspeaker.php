@@ -1,12 +1,13 @@
 <?php
-require('../../controller/admin/controller_addspeaker.php');
+require('../../../controller/admin/speakers/controller_addspeaker.php');
+
 
 ?>
 
 <!doctype html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Ajouter un intervant</title>
     <!-- <link rel="stylesheet" href="style.css">
     <script src="script.js"></script> -->
@@ -22,10 +23,12 @@ require('../../controller/admin/controller_addspeaker.php');
             <div class="row">
 
                 <div class="col">
+                    <label for="firstname">Prénom</label>
                     <input type="text" class="form-control" placeholder="Prénom" name="firstname">
                 </div>
 
                 <div class="col">
+                <label for="lastname">Nom</label>
                     <input type="text" class="form-control" placeholder="Nom" name="lastname">
                 </div>
             </div>
@@ -33,40 +36,48 @@ require('../../controller/admin/controller_addspeaker.php');
             <!-- Job and company -->
             <div class="row">
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Métier" name="job">
+                    <label for="job">Métier</label>
+                    <input type="text" class="form-control" placeholder="Métier" name="job">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Entreprise" name="company">
+                    <label for="company">Entreprise</label>
+                    <input type="text" class="form-control" placeholder="Entreprise" name="company">
                 </div>
             </div>
 
             <!-- Website and instagram -->
             <div class="row">
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Site Web" name="website">
+                    <label for="website">Site Web</label>
+                    <input type="url" class="form-control" placeholder="Site Web" name="website">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Instagram" name="instagram">
+                    <label for="instagram">Instagram</label>
+                    <input type="url" class="form-control" placeholder="Instagram" name="instagram">
                 </div>
             </div>
 
             <!-- linkedin and facebook -->
             <div class="row">
                 <div class="col">
-                <input type="text" class="form-control" placeholder="LinkedIn" name="linkedin">
+                    <label for="linkedin">LinkedIn</label>
+                    <input type="url" class="form-control" placeholder="LinkedIn" name="linkedin">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Facebook" name="facebook">
+                    <label for="firstname">Facebook</label>
+                    <input type="url" class="form-control" placeholder="Facebook" name="facebook">
                 </div>
             </div>
 
             <!-- phone and email -->
             <div class="row">
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Mobile" name="contact_phone">
+                    <label for="contact_phone">Téléphone</label>
+                    <input type="text" class="form-control" placeholder="Mobile" name="contact_phone">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Email" name="contact_email">
+                    <label for="contact_email">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" name="contact_email">
                 </div>
             </div>
 
