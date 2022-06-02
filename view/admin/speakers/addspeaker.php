@@ -23,13 +23,8 @@ require('../../../controller/admin/speakers/controller_addspeaker.php');
             <div class="row">
 
                 <div class="col">
-                    <label for="firstname">Prénom</label>
-                    <input type="text" class="form-control" placeholder="Prénom" name="firstname">
-                </div>
-
-                <div class="col">
                 <label for="lastname">Nom</label>
-                    <input type="text" class="form-control" placeholder="Nom" name="lastname">
+                    <input type="text" class="form-control" placeholder="Nom" name="name">
                 </div>
             </div>
 

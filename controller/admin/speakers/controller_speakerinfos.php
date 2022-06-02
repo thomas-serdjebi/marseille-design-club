@@ -1,5 +1,6 @@
 <?php
 
+require('../../../model/database.php');
 require('../../../model/class_speakers.php');
 
 //Verifying id is only numeric to protect against script injections

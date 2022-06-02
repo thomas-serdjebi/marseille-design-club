@@ -1,5 +1,6 @@
 <?php
 
+require('../../../model/database.php');
 require('../../../model/class_speakers.php');
 
 //Verifying id is only numeric to protect against script injections
@@ -19,8 +20,7 @@ if(!is_numeric($_GET['id'])){
     if(isset($_POST['register'])) {
 
         //The variables are all well picked up and secure;
-        $firstname = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['firstname'])))));
-        $lastname = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['lastname'])))));
+        $name = htmlentities(htmlspecialchars(trim($_POST['name'])));
         $job = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['job'])))));
         $company = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['company'])))));
         $website = htmlspecialchars(htmlentities(trim($_POST['website'])));
@@ -41,29 +41,10 @@ if(!is_numeric($_GET['id'])){
         $regex ="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]/u";
 
 
-        if(empty($firstname)){
+        if(empty($name)){
             $valid = false;
             echo "firstname vide";
             
-        }
-
-        if(!empty($firstname) && !preg_match($regex,$firstname)) { //allows A, a, à, -
-            $valid = false;
-            echo "firstname : carac non autorisé";
-            
-        }
-
-        
-        //Check lastname field filled and caracters allowed
-
-        if(empty($lastname)) {
-            $valid = false;
-            echo " lastname : vide";
-        }
-        
-        if(!empty($lastname) && !preg_match($regex, $lastname)) { //allows A, a, à, -
-            $valid = false;
-            echo "lastname : carac non autorisé";
         }
 
         //Check job field filled and caracters allowed

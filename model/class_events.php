@@ -1,16 +1,11 @@
 <?php
 
-    require('database.php');
-
-    
-
     //Class Speakers with all functions related to Speakers
 
     class Events extends DataBase {
 
         protected $id;
-        public $title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4;  ;
-
+        public $title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4; 
 
         //Function returning a table with all infos of all events - to be tested
         public function listAllEvents(){

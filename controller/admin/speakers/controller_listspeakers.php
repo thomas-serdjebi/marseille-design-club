@@ -1,5 +1,6 @@
 <?php
 
+require('../../../model/database.php');
 require('../../../model/class_speakers.php');
 
 //Array with all the speakers -tested/working

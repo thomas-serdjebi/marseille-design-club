@@ -8,7 +8,7 @@ require('../../../controller/admin/speakers/controller_updatespeaker.php');
 <html lang="fr">
     <head>
     <meta charset="UTF-8">
-    <title>Modifier les infos de <?php echo $speaker['firstname'] ; echo ' ' ; echo $speaker['lastname'] ; ?> </title>
+    <title>Modifier les infos de <?php echo $speaker['name'] ; ?> </title>
     <!-- <link rel="stylesheet" href="style.css">
     <script src="script.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -23,13 +23,8 @@ require('../../../controller/admin/speakers/controller_updatespeaker.php');
             <div class="row">
 
                 <div class="col">
-                    <label for="firstname">Prénom</label>
-                    <input type="text" class="form-control" placeholder="Prénom" name="firstname" value ="<?php echo $speaker['firstname'] ; ?>">
-                </div>
-
-                <div class="col">
                 <label for="lastname">Nom</label>
-                    <input type="text" class="form-control" placeholder="Nom" name="lastname" value ="<?php echo $speaker['lastname'] ; ?>">
+                    <input type="text" class="form-control" placeholder="Nom" name="name" value ="<?php echo $speaker['lastname'] ; ?>">
                 </div>
             </div>
 

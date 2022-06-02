@@ -1,21 +1,17 @@
 <?php
 
-    require('database.php');
-
-    
-
     //Class Speakers with all functions related to Speakers
 
     class Speakers extends DataBase {
 
         protected $id;
-        public $firstname, $lastname, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email ;
+        public $name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email ;
 
 
         //Function returning a table with all infos of the speakers - tested/working
         public function listAll(){
             
-            $sql = "SELECT * from speakers";
+            $sql = "SELECT * from speakers ORDER BY name ASC";
             $query = $this->connexion->prepare($sql);
             $query->execute();
             $allSpeakers = $query->fetchAll();
@@ -34,11 +30,10 @@
         }
 
         //Function adding a new speaker to the database - tested/working 
-        public function addSpeaker($firstname, $lastname, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
+        public function addSpeaker($name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
 
             $data = [
-                ':firstname'=>$firstname,
-                ':lastname'=>$lastname,
+                ':name'=>$name,
                 ':job'=>$job,
                 ':company'=>$company,
                 ':website'=>$website,
@@ -49,20 +44,19 @@
                 'contact_email'=>$contact_email,
             ];
 
-            $sql = "INSERT INTO speakers (firstname, lastname, job, company, website, instagram, linkedin, facebook, contact_phone, contact_email) 
-            VALUES (:firstname, :lastname, :job, :company, :website, :instagram, :linkedin, :facebook, :contact_phone, :contact_email)";
+            $sql = "INSERT INTO speakers (name, job, company, website, instagram, linkedin, facebook, contact_phone, contact_email) 
+            VALUES (:name, :job, :company, :website, :instagram, :linkedin, :facebook, :contact_phone, :contact_email)";
             $query = $this->connexion->prepare($sql);
             $query->execute($data);
 
         }
 
         //Function updating a speaker from the database - tested/working
-        public function updateSpeaker($id, $firstname, $lastname, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
+        public function updateSpeaker($id, $name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
 
             $data = [
                 ':id'=>$id,
-                ':firstname'=>$firstname,
-                ':lastname'=>$lastname,
+                ':name'=>$name,
                 ':job'=>$job,
                 ':company'=>$company,
                 ':website'=>$website,
@@ -73,7 +67,7 @@
                 'contact_email'=>$contact_email,
             ];
 
-            $sql = "UPDATE speakers SET firstname = :firstname, lastname = :lastname, job = :job, company = :company, website = :website, instagram = :instagram, linkedin = :linkedin, facebook = :facebook, contact_phone = :contact_phone, contact_email = :contact_email WHERE id=:id ";
+            $sql = "UPDATE speakers SET name = :name, job = :job, company = :company, website = :website, instagram = :instagram, linkedin = :linkedin, facebook = :facebook, contact_phone = :contact_phone, contact_email = :contact_email WHERE id=:id ";
             $query = $this->connexion->prepare($sql);
             $query->execute($data);
 
@@ -85,15 +79,6 @@
             $query = $this->connexion->prepare($sql);
             $query->execute([':id'=>$id]);
         }
-
-        
-
-
-
-
-
-
-
 
     }
 

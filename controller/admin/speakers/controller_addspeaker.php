@@ -1,12 +1,12 @@
 <?php
+require('../../../model/database.php');
 require('../../../model/class_speakers.php');
 
 //TESTED - WORKING - BUT HAVE TO CORRECT REGEX
 if(isset($_POST['register'])){
 
     //The variables are all well picked up and secure;
-    $firstname = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['firstname'])))));
-    $lastname = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['lastname'])))));
+    $name = htmlentities(htmlspecialchars(trim($_POST['name'])));
     $job = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['job'])))));
     $company = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['company'])))));
     $website = htmlspecialchars(htmlentities(trim($_POST['website'])));
