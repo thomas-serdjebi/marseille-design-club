@@ -8,6 +8,7 @@ if(!is_numeric($_GET['id'])){
 
 } else {
 
+    $id = htmlspecialchars($_GET['id']);
     //Array with all the infos of the concerned speaker -tested/working
     $id = $_GET['id'];
     $speakerInfos = new Speakers();

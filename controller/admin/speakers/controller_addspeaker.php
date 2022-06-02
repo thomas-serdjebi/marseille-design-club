@@ -1,7 +1,7 @@
 <?php
 require('../../../model/class_speakers.php');
 
-//TESTED - WORKING
+//TESTED - WORKING - BUT HAVE TO CORRECT REGEX
 if(isset($_POST['register'])){
 
     //The variables are all well picked up and secure;

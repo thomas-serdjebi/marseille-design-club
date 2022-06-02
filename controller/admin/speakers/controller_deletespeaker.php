@@ -12,7 +12,7 @@ if(!is_numeric($_GET['id'])){
 
     //Array with all the infos of the concerned speaker -tested/working
 
-    $id = $_GET['id'];
+    $id = htmlspecialchars($_GET['id']);
     
     if(isset($_POST['confirm_delete'])) {
         $deleteSpeaker = new Speakers();

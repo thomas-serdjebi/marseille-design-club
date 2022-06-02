@@ -8,6 +8,9 @@
 
     class Speakers extends DataBase {
 
+        protected $id;
+        public $firstname, $lastname, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email ;
+
 
         //Function returning a table with all infos of the speakers - tested/working
         public function listAll(){
