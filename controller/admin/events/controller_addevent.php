@@ -34,10 +34,7 @@ if (isset($_POST['register'])) {
     $speaker3 = htmlspecialchars($_POST['speaker_3']);
     $speaker4 = htmlspecialchars($_POST['speaker_4']);
     $cancelation = 0;
-    $id_speaker_1 = '';
-    $id_speaker_2 = '';
-    $id_speaker_3 = '';
-    $id_speaker_4 = '';
+
 
     
     $valid = (boolean) true ; //Variable to manage errors - when an error is detected, become false;
@@ -54,6 +51,12 @@ if (isset($_POST['register'])) {
         echo "début: vide";
     }
 
+    if(empty($ending)) {
+        $ending = null;
+    }
+
+    var_dump($ending);
+
    
     //Converts name of the speaker to and id for the FK in the table Events
     if(!empty($speaker1)) {
@@ -62,14 +65,18 @@ if (isset($_POST['register'])) {
         $id_speaker_1 = (int) $id1['id'];
         var_dump($id_speaker_1);
 
+    } else {
+        $id_speaker_1 = null;
     }
 
     if(!empty($speaker2)) {
         $get_id2 = new Speakers();
         $id2 = $get_id2->getSpeakerId($speaker2);
-        $id_speaker_2 = (int) $id1['id'];
+        $id_speaker_2 = (int) $id2['id'];
         var_dump($id_speaker_2);
 
+    } else {
+        $id_speaker_2 = null;
     }
 
     if(!empty($speaker3)) {
@@ -78,6 +85,8 @@ if (isset($_POST['register'])) {
         $id_speaker_3 = (int) $id3['id'];
         var_dump($id_speaker_3);
 
+    } else {
+        $id_speaker_3 = null;
     }
 
     if(!empty($speaker4)) {
@@ -86,6 +95,8 @@ if (isset($_POST['register'])) {
         $id_speaker_4 = (int) $id4['id'];
         var_dump($id_speaker_4);
 
+    } else {
+        $id_speaker_4 = null;
     }
 
     if ( $valid == true ) {

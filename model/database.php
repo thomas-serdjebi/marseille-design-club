@@ -11,7 +11,6 @@ class DataBase {
         try{
             $db = new PDO("mysql:host=localhost;dbname=marseilledesignclub", 'root', '');
             $db->exec('SET NAMES utf8');
-            echo 'Connexion réussie';
             $this->connexion = $db;
             return $db;
             
