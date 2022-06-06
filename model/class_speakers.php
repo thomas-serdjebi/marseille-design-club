@@ -4,7 +4,7 @@
 
     class Speakers extends DataBase {
 
-        protected $id;
+        public $id;
         public $name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email ;
 
 
@@ -33,10 +33,10 @@
         public function addSpeaker($name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
 
             $data = [
-                ':name'=>$name,
-                ':job'=>$job,
-                ':company'=>$company,
-                ':website'=>$website,
+                'name'=>$name,
+                'job'=>$job,
+                'company'=>$company,
+                'website'=>$website,
                 'instagram'=>$instagram,
                 'linkedin'=>$linkedin,
                 'facebook'=>$facebook,
@@ -55,11 +55,11 @@
         public function updateSpeaker($id, $name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email){
 
             $data = [
-                ':id'=>$id,
-                ':name'=>$name,
-                ':job'=>$job,
-                ':company'=>$company,
-                ':website'=>$website,
+                'id'=>$id,
+                'name'=>$name,
+                'job'=>$job,
+                'company'=>$company,
+                'website'=>$website,
                 'instagram'=>$instagram,
                 'linkedin'=>$linkedin,
                 'facebook'=>$facebook,
@@ -78,6 +78,19 @@
             $sql = "DELETE FROM speakers WHERE id = :id";
             $query = $this->connexion->prepare($sql);
             $query->execute([':id'=>$id]);
+        }
+
+        //Function returning the id of a speaker from the database : used for the addevent page input speaker - to be tested
+        public function getSpeakerId($name) {
+            $sql = "SELECT id FROM speakers WHERE name = :name";
+            $query = $this->connexion->prepare($sql);
+            $query->execute(['name'=>$name]);
+            
+            $id = $query->fetch();
+
+            return $id;
+
+
         }
 
     }

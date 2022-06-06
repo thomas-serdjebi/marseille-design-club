@@ -13,6 +13,7 @@ class DataBase {
             $db->exec('SET NAMES utf8');
             echo 'Connexion réussie';
             $this->connexion = $db;
+            return $db;
             
         }
           

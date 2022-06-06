@@ -1,7 +1,6 @@
 <?php
 require('../../../controller/admin/events/controller_addevent.php');
 
-
 ?>
 
 <!doctype html>
@@ -26,7 +25,7 @@ require('../../../controller/admin/events/controller_addevent.php');
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
-                <input type="text" class="form-control" name="title" placeholder="type">
+                <input type="text" class="form-control" name="type" placeholder="type">
             </div>
 
             <div class="mb-3">
@@ -51,7 +50,7 @@ require('../../../controller/admin/events/controller_addevent.php');
 
             <div class="mb-3">
                 <label for="ticketing" class="form-label">Lien Billeterie</label>
-                <input type="url" class="form-control" name="ticketing" placeholder="Billeterie" required="required">
+                <input type="url" class="form-control" name="ticketing" placeholder="Billeterie">
             </div>
 
             <div class="mb-3">
@@ -87,7 +86,7 @@ require('../../../controller/admin/events/controller_addevent.php');
 
             <div class="mb-3">
                 <label for="price" class="form-label">Tarif</label>
-                <input type="number" class="form-control" name="description" placeholder="Tarif">
+                <input type="number" class="form-control" name="price" placeholder="Tarif">
             </div>
 
             <div class="mb-3">
