@@ -40,12 +40,12 @@ require('../../../controller/admin/events/controller_updateevent.php');
 
             <div class="mb-3">
                 <label for="beginning" class="form-label">Début</label>
-                <input type="datetime-local" class="form-control" name="beginning" placeholder="Début" required="required" value="<?php echo $eventInfos['beginning'] ;?>">
+                <input type="datetime-local" class="form-control" name="beginning" placeholder="Début" required="required" value="<?php echo $beginningDate->format('Y-m-d') ; echo"T" ; echo $beginningDate->format('H:i')?>">
             </div>
 
             <div class="mb-3">
                 <label for="ending" class="form-label">Fin</label>
-                <input type="datetime-local" class="form-control" name="ending" placeholder="Fin" value="<?php echo $eventInfos['ending'] ;?>">
+                <input type="datetime-local" class="form-control" name="ending" placeholder="Fin" value="<?php echo $endingDate->format('Y-m-d') ; echo"T" ; echo $endingDate->format('H:i')?>">
             </div>
 
             <div class="mb-3">
@@ -92,40 +92,64 @@ require('../../../controller/admin/events/controller_updateevent.php');
             <div class="mb-3">
                 <label for="speaker_1" class="form-label">Intervenant 1</label>
                 <select id="speaker_1" name="speaker_1" class="form-select">
-                    <option><?php echo $speakerName[0]; ?></option>
-                    <?php foreach($speakers as $speaker) { 
-                        echo "<option>".$speaker['name']."</option>";
-                    } ?>
+                    <?php 
+                        if(isset($speakerName[0])) { echo 
+                            "<option>".$speakerName[0]."</option>
+                            <option></option>"; 
+                        } else { echo "<option></option>" ;}
+            
+                        foreach($speakers as $speaker) { 
+                            echo "<option>".$speaker['name']."</option>";
+                        } 
+                    ?>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="speaker_2" class="form-label">Intervenant 2</label>
                 <select id="speaker_2" name="speaker_2" class="form-select">
-                    <option><?php echo $speakerName[1]; ?></option>
-                    <?php foreach($speakers as $speaker) { 
-                        echo "<option>".$speaker['name']."</option>";
-                    } ?>
+                    <?php 
+                        if(isset($speakerName[1])) { echo 
+                            "<option>".$speakerName[1]."</option>
+                            <option></option>"; 
+                        } else { echo "<option></option>" ;}
+            
+                        foreach($speakers as $speaker) { 
+                            echo "<option>".$speaker['name']."</option>";
+                        } 
+                    ?>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="speaker_3" class="form-label">Intervenant 3</label>
                 <select id="speaker_3" name="speaker_3" class="form-select">
-                    <option><?php echo $speakerName[2]; ?></option>
-                    <?php foreach($speakers as $speaker) { 
-                        echo "<option>".$speaker['name']."</option>";
-                    } ?>
+                    <?php 
+                        if(isset($speakerName[2])) { echo 
+                            "<option>".$speakerName[2]."</option>
+                            <option></option>"; 
+                        } else { echo "<option></option>" ;}
+            
+                        foreach($speakers as $speaker) { 
+                            echo "<option>".$speaker['name']."</option>";
+                        } 
+                    ?>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="speaker_4" class="form-label">Intervenant 4</label>
                 <select id="speaker_4" name="speaker_4" class="form-select">
-                    <option><?php echo $speakerName[3] ; ?></option>
-                    <?php foreach($speakers as $speaker) { 
-                        echo "<option>".$speaker['name']."</option>";
-                    } ?>
+                    <?php 
+                        if(isset($speakerName[3])) { echo 
+                            "<option>".$speakerName[3]."</option>
+                            <option></option>"; 
+                        } else { echo "<option></option>" ;}
+            
+                        foreach($speakers as $speaker) { 
+                            echo "<option>".$speaker['name']."</option>";
+                        } 
+                    ?>
                 </select>
             </div>
 

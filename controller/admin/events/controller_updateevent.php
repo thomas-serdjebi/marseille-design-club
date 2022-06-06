@@ -20,24 +20,35 @@ if(!is_numeric($_GET['id'])){
     $speakersList = new Speakers();
     $speakers = $speakersList->listAll();
 
+
     //Converts the id in the options speakers field selection to display the name of the speakers
 
-    $speakers = array(
-        $id_speaker_1 = $eventInfos['id_speaker_1'],
-        $id_speaker_2 = $eventInfos['id_speaker_2'],
-        $id_speaker_3 = $eventInfos['id_speaker_3'],
-        $id_speaker_4 = $eventInfos['id_speaker_4'],
+    $speakersArray = array(
+        $id_speaker_1 = (int) $eventInfos['id_speaker_1'],
+        $id_speaker_2 = (int) $eventInfos['id_speaker_2'],
+        $id_speaker_3 = (int) $eventInfos['id_speaker_3'],
+        $id_speaker_4 = (int) $eventInfos['id_speaker_4'],
     );
 
-    for ($i = 0 ;  isset($speakers[$i]); $i++) {
-        // var_dump($speakers[$i]);
-        $getSpeaker[$i] = new SPeakers();
-        $speakerInfos[$i] = $getSpeaker[$i]->speakerInfos($speakers[$i]);
+    for ($i = 0 ;  isset($speakersArray[$i]); $i++) {
+        
+        $getSpeaker[$i] = new Speakers();
+        $speakerInfos[$i] = $getSpeaker[$i]->speakerInfos($speakersArray[$i]);
         $speakerName[$i] = $speakerInfos[$i]['name'];
-        echo $speakerName[$i];
+       
     }
 
-    
+    //Converts the dates to a format that can fit the datetime-local format in the update form
+
+    $beginningDate = new DateTime($eventInfos['beginning']) ;
+
+    //Ending is not mandatory so if it exists in the database, we convert it to display it in the form
+
+    if ($eventInfos['ending'] != null) {
+        $endingDate = new DateTime($eventInfos['ending']) ;
+    }
+
+
 
 
     if (isset($_POST['register'])) {
@@ -62,64 +73,81 @@ if(!is_numeric($_GET['id'])){
         $speaker3 = htmlspecialchars($_POST['speaker_3']);
         $speaker4 = htmlspecialchars($_POST['speaker_4']);
         $cancelation = 0;
-
+    
+    
         
         $valid = (boolean) true ; //Variable to manage errors - when an error is detected, become false;
-
+    
         //ERRORS MANAGEMENT : required fields are title and beginning
-
+    
         if(empty($title)){
             $valid = false;
             echo "titre: vide";
         }
-
+    
         if (empty($beginning)) {
             $valid = false;
             echo "début: vide";
         }
-
     
-        //Converts name of the speaker to and id for the FK in the table Events
+    
+        //Against the database bug when ending is empty - some events don't have an ending which is planed
+        if(empty($ending)) {
+            $ending = null;
+        }
+    
+       
+        //Converts name of the speaker to and id for the FK in the table Events / null if empty or it causes a bug to add the event in the database
         if(!empty($speaker1)) {
             $get_id1 = new Speakers();
             $id1 = $get_id1->getSpeakerId($speaker1);
             $id_speaker_1 = (int) $id1['id'];
-            var_dump($id_speaker_1);
-
+    
+        } else {
+            $id_speaker_1 = null;
         }
-
+    
         if(!empty($speaker2)) {
             $get_id2 = new Speakers();
             $id2 = $get_id2->getSpeakerId($speaker2);
-            $id_speaker_2 = (int) $id1['id'];
-            var_dump($id_speaker_2);
-
+            $id_speaker_2 = (int) $id2['id'];
+    
+        } else {
+            $id_speaker_2 = null;
         }
-
+    
         if(!empty($speaker3)) {
             $get_id3 = new Speakers();
             $id3 = $get_id3->getSpeakerId($speaker3);
             $id_speaker_3 = (int) $id3['id'];
-            var_dump($id_speaker_3);
-
+    
+        } else {
+            $id_speaker_3 = null;
         }
-
+    
         if(!empty($speaker4)) {
             $get_id4 = new Speakers();
             $id4 = $get_id4->getSpeakerId($speaker4);
             $id_speaker_4 = (int) $id4['id'];
-            var_dump($id_speaker_4);
-
+    
+        } else {
+            $id_speaker_4 = null;
         }
+    
+        if ( $valid == true ) {
+            $addEvent = new Events();
+            $addEvent->updateEvent($title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+        }
+    
+       
 
-        // if ( $valid == true ) {
-        //     $addEvent = new Events();
-        //     $addEvent->addEvent($title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
-        // }
-
-
+    
         
     }
+
+    
+
+
 
     
 }

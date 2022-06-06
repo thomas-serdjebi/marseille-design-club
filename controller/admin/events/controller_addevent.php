@@ -51,14 +51,14 @@ if (isset($_POST['register'])) {
         echo "début: vide";
     }
 
+
+    //Against the database bug when ending is empty - some events don't have an ending which is planed
     if(empty($ending)) {
         $ending = null;
     }
 
-    var_dump($ending);
-
    
-    //Converts name of the speaker to and id for the FK in the table Events
+    //Converts name of the speaker to and id for the FK in the table Events / null if empty or it causes a bug to add the event in the database
     if(!empty($speaker1)) {
         $get_id1 = new Speakers();
         $id1 = $get_id1->getSpeakerId($speaker1);
