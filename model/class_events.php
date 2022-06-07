@@ -62,7 +62,7 @@
 
         }
 
-        //Function updating a speaker from the database - to be tested
+        //Function updating a speaker from the database - tested/working
         public function updateEvent($id, $title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4){
 
             $data = [

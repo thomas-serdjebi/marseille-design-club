@@ -50,7 +50,7 @@ if(!is_numeric($_GET['id'])){
 
 
 
-
+    //TESTED/WORKING
     if (isset($_POST['register'])) {
 
         //The variables are all well picked up and secure;
