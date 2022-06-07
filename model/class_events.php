@@ -63,9 +63,10 @@
         }
 
         //Function updating a speaker from the database - to be tested
-        public function updateEvent($title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4){
+        public function updateEvent($id, $title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4){
 
             $data = [
+                'id'=>$id,
                 'title'=>$title,
                 'type'=>$type,
                 'facebook_link'=>$facebook_link,
@@ -87,9 +88,12 @@
                 'id_speaker_4'=>$id_speaker_4,
             ];
 
-            $sql = "UPDATE speakers SET title = :title, type = :type, facebook_link = :facebook_link, thematic = :thematic, beginning = :beginning, ending = :ending, ticketing = :ticketing, emplacement_name = :emplacement_name, emplacement_facebook_link = :emplacement_facebook_link, emplacement_website = :emplacement_website, addreess = :address, address_link = :address_link, description = :description, price = :price, cancelation = :cancelation, id_speaker_1 = :id_speaker_1, id_speaker_2 = :id_speaker_2, id_speaker_3 = :id_speaker_3, id_speaker_4 = :id_speaker_4)";
+            var_dump($data);
+
+            $sql = "UPDATE events SET title = :title, type = :type, facebook_link = :facebook_link, thematic = :thematic, beginning = :beginning, ending = :ending, ticketing = :ticketing, emplacement_name = :emplacement_name, emplacement_facebook_link = :emplacement_facebook_link, emplacement_website = :emplacement_website, address = :address, address_link = :address_link, description = :description, price = :price, cancelation = :cancelation, id_speaker_1 = :id_speaker_1, id_speaker_2 = :id_speaker_2, id_speaker_3 = :id_speaker_3, id_speaker_4 = :id_speaker_4 WHERE id =:id";
             $query = $this->connexion->prepare($sql);
             $query->execute($data);
+            var_dump($query);
 
         }
 

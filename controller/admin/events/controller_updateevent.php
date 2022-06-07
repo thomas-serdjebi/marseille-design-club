@@ -135,8 +135,9 @@ if(!is_numeric($_GET['id'])){
         }
     
         if ( $valid == true ) {
-            $addEvent = new Events();
-            $addEvent->updateEvent($title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+            $updateEvent = new Events();
+            $updateEvent->updateEvent($id,$title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+            header('Refresh: 0');
         }
     
        

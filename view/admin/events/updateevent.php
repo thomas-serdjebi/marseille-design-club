@@ -81,7 +81,7 @@ require('../../../controller/admin/events/controller_updateevent.php');
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="Description" value="<?php echo $eventInfos['description'] ;?>"></textarea>
+                <textarea class="form-control" name="description" placeholder="Description"><?php echo $eventInfos['description'] ;?></textarea>
             </div>
 
             <div class="mb-3">
