@@ -97,24 +97,11 @@
 
         }
 
-        //Function deleting a speaker from the database - tested/working
+        //Function deleting an event from the database - tested/working
         public function deleteEvent($id) {
             $sql = "DELETE FROM events WHERE id = :id";
             $query = $this->connexion->prepare($sql);
-            $query->execute([':id'=>$id]);
+            $query->execute(['id'=>$id]);
         }
-
-        
-
-
-
-
-
-
-
-
     }
-
-
-
 ?>

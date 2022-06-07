@@ -156,6 +156,8 @@ require('../../../controller/admin/events/controller_updateevent.php');
             <button type="submit" name="register" value="Ajouter" class="btn btn-primary">Ajouter</button>
         </form>
 
+        <a href="deleteevent.php?id=<?php echo $eventInfos['id'] ; ?>"><button>Supprimer</button></a>
+
 
     
     </body>
