@@ -34,7 +34,7 @@ if(!is_numeric($_GET['id'])){
 
         $valid = (boolean) true ; //Variable to manage errors - when an error is detected, become false;
 
-        //ERRORS MANAGEMENT : required fields are firstname, lastname and job - REGEX DOESNT WORK --> WHY?
+        //ERRORS MANAGEMENT : only required field is name
 
         //Check firstname field filled and caracters allowed
 
@@ -110,6 +110,8 @@ if(!is_numeric($_GET['id'])){
             }
 
         }
+
+        
 
         if($valid == true) {
 

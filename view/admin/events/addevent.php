@@ -16,7 +16,7 @@ require('../../../controller/admin/events/controller_addevent.php');
     <body>
 
         <!-- Add an Event form -->
-        <form method="post">
+        <form method="post" action="#" enctype="multipart/form-data">
     
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
@@ -81,7 +81,7 @@ require('../../../controller/admin/events/controller_addevent.php');
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" name="description" placeholder="Description">
+                <textarea class="form-control" name="description" placeholder="Description"></textarea>
             </div>
 
             <div class="mb-3">
@@ -128,6 +128,13 @@ require('../../../controller/admin/events/controller_addevent.php');
                     } ?>
                 </select>
             </div>
+
+            <div class="mb-3">
+                <label for="banner" class="form-label">Bannière</label>
+                <input type="file" name="banner">
+            </div>
+
+
 
             <button type="submit" name="register" value="Ajouter" class="btn btn-primary">Ajouter</button>
         </form>

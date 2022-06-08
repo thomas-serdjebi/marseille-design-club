@@ -15,10 +15,10 @@ $speakers = $speakersList->listAll();
 if (isset($_POST['register'])) {
 
     //The variables are all well picked up and secure;
-    $title = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['title'])))));
+    $title = htmlentities(htmlspecialchars(trim($_POST['title'])));
     $type = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['type'])))));
     $facebook_link = htmlspecialchars(htmlentities(trim($_POST['facebook_link'])));
-    $thematic = ucwords(strtolower(htmlentities(htmlspecialchars(trim($_POST['thematic'])))));
+    $thematic = htmlentities(htmlspecialchars(trim($_POST['thematic'])));
     $beginning = htmlspecialchars($_POST['beginning']);
     $ending = htmlspecialchars($_POST['ending']);
     $ticketing = htmlspecialchars(htmlentities(trim($_POST['ticketing'])));
@@ -27,13 +27,14 @@ if (isset($_POST['register'])) {
     $emplacement_website = htmlspecialchars(htmlentities(trim($_POST['emplacement_website'])));
     $address = strtolower(htmlentities(htmlspecialchars(trim($_POST['address']))));
     $address_link= htmlspecialchars(htmlentities(trim($_POST['address_link'])));
-    $description = htmlentities(htmlspecialchars(trim($_POST['description'])));
+    $description = htmlentities(trim($_POST['description']));
     $price = htmlspecialchars($_POST['price']);
-    $speaker1 = htmlspecialchars($_POST['speaker_1']);
-    $speaker2 = htmlspecialchars($_POST['speaker_2']);
-    $speaker3 = htmlspecialchars($_POST['speaker_3']);
-    $speaker4 = htmlspecialchars($_POST['speaker_4']);
+    $speaker1 = htmlentities($_POST['speaker_1']);
+    $speaker2 = htmlentities($_POST['speaker_2']);
+    $speaker3 = htmlentities($_POST['speaker_3']);
+    $speaker4 = htmlentities($_POST['speaker_4']);
     $cancelation = 0;
+    $banner ='';
 
 
     
@@ -99,9 +100,41 @@ if (isset($_POST['register'])) {
         $id_speaker_4 = null;
     }
 
+    //Upload the banner for the event
+
+    if(isset($_FILES['banner']) && !empty($_FILES['banner']['name'])) { 
+        $max_size =  2097152 ; // security - limit 2mo
+        $valid_extensions = array('jpg', 'jpeg', 'gif', 'png'); // security - only images
+        $extension_upload = strtolower(substr(strrchr($_FILES['banner']['name'], '.'), 1)); // return the files extension with strrch and delete the point with substr, and all to lowercase with strtolower
+
+        if ($_FILES['banner']['size'] > $max_size) {
+            $valid = false;
+            echo "Le fichier ne doit pas dépasser 2mo";
+
+        } else if (!in_array($extension_upload, $valid_extensions)) { 
+            $valid = false;
+            echo "Le fichier doit être au format jpg, jpeg, gif ou png";
+
+        } else {
+            $file_path =  "../../../view/assets/events/banners/".$title.".".$extension_upload;
+            $result = move_uploaded_file($_FILES['banner']['tmp_name'], $file_path);
+            $banner = $title.".".$extension_upload;
+
+            if($result == false) {
+                $valid = false;
+                echo "Erreur lors de l'importation de votre bannière d'évènement";
+            }
+
+            
+        }
+
+        
+    }
+
     if ( $valid == true ) {
         $addEvent = new Events();
-        $addEvent->addEvent($title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+        $addEvent->addEvent($title, $banner, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+        var_dump($_POST);
     }
 
    

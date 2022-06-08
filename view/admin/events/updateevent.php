@@ -16,7 +16,7 @@ require('../../../controller/admin/events/controller_updateevent.php');
     <body>
 
         <!-- Add an Event form -->
-        <form method="post">
+        <form method="post" action="#" enctype="multipart/form-data">
     
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
@@ -45,7 +45,7 @@ require('../../../controller/admin/events/controller_updateevent.php');
 
             <div class="mb-3">
                 <label for="ending" class="form-label">Fin</label>
-                <input type="datetime-local" class="form-control" name="ending" placeholder="Fin" value="<?php echo $endingDate->format('Y-m-d') ; echo"T" ; echo $endingDate->format('H:i')?>">
+                <input type="datetime-local" class="form-control" name="ending" placeholder="Fin" value="<?php if (isset($endingDate)){echo $endingDate->format('Y-m-d') ; echo"T" ; echo $endingDate->format('H:i') ;} else echo "";?>">
             </div>
 
             <div class="mb-3">
@@ -153,7 +153,12 @@ require('../../../controller/admin/events/controller_updateevent.php');
                 </select>
             </div>
 
-            <button type="submit" name="register" value="Ajouter" class="btn btn-primary">Ajouter</button>
+            <div class="mb-3">
+                <label for="banner" class="form-label">Bannière</label>
+                <input type="file" name="banner">
+            </div>
+
+            <button type="submit" name="register" value="Mettre à jour" class="btn btn-primary">Mettre à jour</button>
         </form>
 
         <a href="deleteevent.php?id=<?php echo $eventInfos['id'] ; ?>"><button>Supprimer</button></a>

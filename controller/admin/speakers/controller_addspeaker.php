@@ -20,43 +20,17 @@ if(isset($_POST['register'])){
 
     $valid = (boolean) true ; //Variable to manage errors - when an error is detected, become false;
 
-    //ERRORS MANAGEMENT : required fields are firstname, lastname and job
+    //ERRORS MANAGEMENT : only required field is name
 
-    //Check firstname field filled and caracters allowed
+    //Check name field filled and caracters allowed
 
     $regex ="/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]/u";
 
 
-    if(empty($firstname)){
+    if(empty($name)){
         $valid = false;
-        echo "firstname vide";
+        echo "name vide";
        
-    }
-
-   if(!empty($firstname) && !preg_match($regex,$firstname)) { //allows A, a, à, -
-        $valid = false;
-        echo "firstname : carac non autorisé";
-        
-    }
-
-    
-    //Check lastname field filled and caracters allowed
-
-    if(empty($lastname)) {
-        $valid = false;
-        echo " lastname : vide";
-    }
-    
-    if(!empty($lastname) && !preg_match($regex, $lastname)) { //allows A, a, à, -
-        $valid = false;
-        echo "lastname : carac non autorisé";
-    }
-
-    //Check job field filled and caracters allowed
-
-    if(empty($job)) {
-        $valid = false;
-        echo" job : vide";
     }
 
 
@@ -119,7 +93,7 @@ if(isset($_POST['register'])){
     if($valid == true) {
 
         $addSpeaker = new Speakers();
-        $addSpeaker->addSpeaker($firstname, $lastname, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email);
+        $addSpeaker->addSpeaker($name, $job, $company, $website, $instagram, $linkedin, $facebook, $contact_phone, $contact_email);
         
 
     }

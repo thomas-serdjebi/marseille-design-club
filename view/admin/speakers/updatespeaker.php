@@ -24,7 +24,7 @@ require('../../../controller/admin/speakers/controller_updatespeaker.php');
 
                 <div class="col">
                 <label for="lastname">Nom</label>
-                    <input type="text" class="form-control" placeholder="Nom" name="name" value ="<?php echo $speaker['lastname'] ; ?>">
+                    <input type="text" class="form-control" placeholder="Nom" name="name" value ="<?php echo $speaker['name'] ; ?>" required="required">
                 </div>
             </div>
 

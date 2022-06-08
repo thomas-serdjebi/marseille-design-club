@@ -24,7 +24,7 @@ require('../../../controller/admin/speakers/controller_addspeaker.php');
 
                 <div class="col">
                 <label for="lastname">Nom</label>
-                    <input type="text" class="form-control" placeholder="Nom" name="name">
+                    <input type="text" class="form-control" placeholder="Nom" name="name" required="required">
                 </div>
             </div>
 

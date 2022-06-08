@@ -15,6 +15,8 @@ if(!is_numeric($_GET['id'])){
     $eventInfos = $eventArray->eventInfos($id);
 
 
+
+
     //Array with all the speakers for the speaker selection inside the form to update an event-tested/working
 
     $speakersList = new Speakers();
@@ -73,9 +75,8 @@ if(!is_numeric($_GET['id'])){
         $speaker3 = htmlspecialchars($_POST['speaker_3']);
         $speaker4 = htmlspecialchars($_POST['speaker_4']);
         $cancelation = 0;
-    
-    
-        
+        $banner = '';
+
         $valid = (boolean) true ; //Variable to manage errors - when an error is detected, become false;
     
         //ERRORS MANAGEMENT : required fields are title and beginning
@@ -133,11 +134,43 @@ if(!is_numeric($_GET['id'])){
         } else {
             $id_speaker_4 = null;
         }
+
+        //Upload the banner for the event
+
+        if(isset($_FILES['banner']) && !empty($_FILES['banner']['name'])) { 
+            $max_size =  2097152 ; // security - limit 2mo
+            $valid_extensions = array('jpg', 'jpeg', 'gif', 'png'); // security - only images
+            $extension_upload = strtolower(substr(strrchr($_FILES['banner']['name'], '.'), 1)); // return the files extension with strrch and delete the point with substr, and all to lowercase with strtolower
+
+            if ($_FILES['banner']['size'] > $max_size) {
+                $valid = false;
+                echo "Le fichier ne doit pas dépasser 2mo";
+
+            } else if (!in_array($extension_upload, $valid_extensions)) { 
+                $valid = false;
+                echo "Le fichier doit être au format jpg, jpeg, gif ou png";
+
+            } else {
+                $file_path =  "../../../view/assets/events/banners/".$title.".".$extension_upload;
+                $result = move_uploaded_file($_FILES['banner']['tmp_name'], $file_path);
+                $banner = $title.".".$extension_upload;
+
+                if($result == false) {
+                    $valid = false;
+                    echo "Erreur lors de l'importation de votre bannière d'évènement";
+                }
+
+                
+            }
+
+            
+        }
     
         if ( $valid == true ) {
+            var_dump($_POST);
             $updateEvent = new Events();
-            $updateEvent->updateEvent($id,$title, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
-            header('Refresh: 0');
+            $updateEvent->updateEvent($id,$title, $banner, $type, $facebook_link, $thematic, $beginning, $ending, $ticketing, $emplacement_name, $emplacement_facebook_link, $emplacement_website, $address, $address_link, $description, $price, $cancelation, $id_speaker_1, $id_speaker_2, $id_speaker_3, $id_speaker_4);
+            
         }
     
        
