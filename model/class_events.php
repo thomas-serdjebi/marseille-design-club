@@ -105,5 +105,21 @@
             $query = $this->connexion->prepare($sql);
             $query->execute(['id'=>$id]);
         }
+        
+        //Function returning the id of an event from the database : used for the uploadimage page input id_event - tested/working
+        public function getEventId($title) {
+            $sql = "SELECT id FROM events WHERE title = :title";
+            $query = $this->connexion->prepare($sql);
+            $query->execute(['title'=>$title]);
+            
+            $id = $query->fetch();
+
+        
+
+            return $id;
+
+        }
+        
+        
     }
 ?>
