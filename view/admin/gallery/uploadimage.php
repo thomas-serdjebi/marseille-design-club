@@ -1,5 +1,5 @@
 <?php
-require('../../../controller/admin/gallery/controller_addimage.php');
+require('../../../controller/admin/gallery/controller_uploadimage.php');
 
 
 ?>

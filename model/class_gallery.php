@@ -5,41 +5,23 @@
     class Gallery extends DataBase {
 
         protected $id;
+        public $img_name, $img_caption, $id_speaker, $id_event;
 
-        public function transfert(){
-            $ret = false;
-            $img_blob = '';
-            $img_size = '';
-            $img_type = '';
-            $img_name = '';
-            $img_caption = '';
-            $img_use = '';
-            $img_id_event = '';
-            $max_size = 250000;
-            $ret = is_uploaded_file($_FILES['fic']['tmp_name']);
+        //Function to upload an image to the gallery - to be tested
+        public function uploadImage($img_name, $img_caption, $id_speaker, $id_event){
 
-            if(!$ret) {
-                echo"Problème de transfert";
-                return false;
-            } else { 
-                //The file is well received
-                $img_size = $_FILES['fic']['size'];
-                echo "taille de l'image $img_size";
-
-                if ($img_size > $max_size ) {
-                    echo "L'image doit être inférieure à 250 000 ";
-                    return false;
-                }
-
-                $img_type = $_FILES['fic']['type'];
-                $img_name = $_FILES['fic']['name'];
-                $img_id_event = $_POST['id_event'];
-                $img_use = $_POST['img_use'];
-
-                
-            }
-
+            $data = [
+                'img_name' => $img_name,
+                'img_caption' => $img_caption,
+                'id_speaker' => $id_speaker,
+                'id_event' => $id_event,
+            ];
+            
+            $sql = "INSERT INTO gallery (img_name, img_caption, id_speaker, id_event) VALUES (:img_name, :img_caption, :id_speaker, :id_event)";
+            $query = $this->$db->prepare($sql);
+            $query->execute($data);
         }
+        
 
     }
 ?>
