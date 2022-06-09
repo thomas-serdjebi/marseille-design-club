@@ -19,20 +19,22 @@ $valid = true;
 if (isset($_POST['upload'])) {
 
 
-    $caption = htmlentities($_POST['caption']);
-    $display_choice = htmlentities($_POST['display']);
-    $event = htmlentities($_POST['event']);
-    $speaker = htmlentities($_POST['speaker']);
+    @$title = htmlentities($_POST['title']);
+    @$caption = htmlentities($_POST['caption']);
+    @$display_choice = htmlentities($_POST['display']);
+    @$event = htmlentities($_POST['event']);
+    @$speaker = htmlentities($_POST['speaker']);
 
-    if(empty($_FILE['image'])) {
+    if(empty($_FILES['picture'])) {
         $valid = false;
         echo "Veuillez chosiir une image";
     }
 
-    if(empty($caption)) {
+    if(empty($title) || empty($caption) ) {
         $valid = false;
-        echo "Veuillez renseigner une légende";
+        echo "Les champs * sont obligatoires";
     }
+
 
     if($display_choice == "Oui") {
         $display = 1 ;
@@ -47,7 +49,10 @@ if (isset($_POST['upload'])) {
         $eventId = new Events();
         $id = $eventId->getEventId($event);
         $id_event = $id['id'];
+        
 
+    } else { 
+        $id_event = null;
     }
 
     if(isset($speaker)) {
@@ -55,36 +60,75 @@ if (isset($_POST['upload'])) {
         $id = $speakerId->getSpeakerId($speaker);
         $id_speaker = $id['id'];
 
+    } else {
+        $id_speaker = null;
     }
 
-    if(isset($_FILES['banner']) && !empty($_FILES['banner']['name'])) { 
+
+    if(isset($_FILES['picture']) && !empty($_FILES['picture']['name'])) { 
+        
         $max_size =  2097152 ; // security - limit 2mo
         $valid_extensions = array('jpg', 'jpeg', 'gif', 'png'); // security - only images
-        $extension_upload = strtolower(substr(strrchr($_FILES['banner']['name'], '.'), 1)); // return the files extension with strrch and delete the point with substr, and all to lowercase with strtolower
-
-        if ($_FILES['banner']['size'] > $max_size) {
-            $valid = false;
-            echo "Le fichier ne doit pas dépasser 2mo";
-
-        } else if (!in_array($extension_upload, $valid_extensions)) { 
-            $valid = false;
-            echo "Le fichier doit être au format jpg, jpeg, gif ou png";
-
-        } else {
-            $file_path =  "../../../view/assets/events/pictures/".$title.".".$extension_upload;
-            $result = move_uploaded_file($_FILES['banner']['tmp_name'], $file_path);
-            $banner = $title.".".$extension_upload;
-
-            if($result == false) {
+        
+        foreach ($_FILES['picture']['size'] as $picture_size){
+            if ($picture_size > $max_size) {
                 $valid = false;
-                echo "Erreur lors de l'importation de votre bannière d'évènement";
+                echo "Par mesure de sécurité, veuillez seulement importer des images inférieures à 2mo.";
+                return false;
+            }
+        }
+
+        $i = 0;
+
+
+        foreach (array_combine($_FILES['picture']['name'], $_FILES['picture']['tmp_name']) as  $picture_name => $tmp_name) {
+            var_dump($picture_name);
+            var_dump($tmp_name);
+
+
+            $i++;
+
+            $extension_upload = strtolower(substr(strrchr($picture_name, '.'), 1)); // return the files extension with strrch and delete the point with substr, and all to lowercase with strtolower
+            if (!in_array($extension_upload, $valid_extensions)) { 
+                $valid = false;
+                echo "Le fichier doit être au format jpg, jpeg, gif ou png";
+                return false;
+    
+            } else {
+                $file_path =  "../../../view/assets/events/pictures/".$picture_name;
+                $result = move_uploaded_file($tmp_name, $file_path);
+                $picture = $title."_".$i.".".$extension_upload;
+                var_dump($picture);
+    
+                if($result == false) {
+                    $valid = false;
+                    echo "Erreur lors de l'importation de votre bannière d'évènement";
+                    return false;
+                }
+
+                if ($valid == true) {
+                    $uploadImage = new Gallery();
+                    $uploadImage->uploadImage($picture, $caption, $display, $id_event, $id_speaker);
+                    echo "Votre photo a bien été ajoutée à la gallerie";
+
+                }
+    
+                
             }
 
-            
+
+
         }
+
+
+
+
+
 
         
     }
+
+
 
 }
 

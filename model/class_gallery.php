@@ -8,18 +8,19 @@
         public $img_name, $img_caption, $id_speaker, $id_event;
 
         //Function to upload an image to the gallery - to be tested
-        public function uploadImage($img_name, $img_caption, $display, $id_speaker, $id_event){
+        public function uploadImage($picture, $img_caption, $display, $id_speaker, $id_event){
 
             $data = [
-                'img_name' => $img_name,
+                'img_name' => $picture,
                 'img_caption' => $img_caption,
                 'display' => $display,
                 'id_speaker' => $id_speaker,
                 'id_event' => $id_event,
             ];
 
-            $sql = "INSERT INTO gallery (img_name, img_caption, id_speaker, id_event) VALUES (:img_name, :img_caption, :id_speaker, :id_event)";
-            $query = $this->$db->prepare($sql);
+
+            $sql = "INSERT INTO gallery (img_name, img_caption, display, id_speaker, id_event) VALUES (:img_name, :img_caption, :display, :id_speaker, :id_event)";
+            $query = $this->connexion->prepare($sql);
             $query->execute($data);
         }
 
@@ -27,7 +28,7 @@
         public function listAllImages(){
             
             $sql = "SELECT * FROM gallery ORDER BY id DESC";
-            $query = $this->$db->prepare($sql);
+            $query = $this->$connexion->prepare($sql);
             $query->execute();
 
             $listAllImages =  $query->fetchAll();

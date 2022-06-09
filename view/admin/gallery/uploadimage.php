@@ -20,11 +20,15 @@ require('../../../controller/admin/gallery/controller_uploadimage.php');
         <form method="post" action="#" enctype="multipart/form-data">
 
             <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
-                <input type="file" name="image" required="required">
+                <label for="image" class="form-label">Image *</label>
+                <input type="file" name="picture[]" required="required" multiple="multiple">
             </div>
             <div class="mb-3">
-                <label for="caption" class="form-label">Légende</label>
+                <label for="title" class="form-label">Titre *</label>
+                <input type="text" name="title" required="required">
+            </div>
+            <div class="mb-3">
+                <label for="caption" class="form-label">Légende *</label>
                 <input type="text" name="caption" placeholer="légende">
             </div>
             <div class="mb-3">
